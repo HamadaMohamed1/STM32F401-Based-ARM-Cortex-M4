@@ -5,10 +5,9 @@
  *      Author: hamada
  */
 
-
+/*************************** Includes ******************************/
 #include "../../../Inc/MCAL/EXTI/EXTI_interface.h"
-
-/*************************** static variables ******************************/
+/*************************** static global variables ******************************/
 static void (* EXTI_Handler[EXTI_MAX_NUMBER])(void) ={NULL};
 static EXTI_source_t EXTI_source ;
 
@@ -121,6 +120,12 @@ Std_RetType_t EXTI_read_pending_flag(EXTI_source_t EXTI_source, pending_flag_t* 
 	return RET_OK;
 }
 /**************************************** EXTI ISRs ********************************************************/
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 0)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI0_IRQHandler(void)
 {
 	EXTI_clear_pending_flag(EXTI_source);
@@ -129,6 +134,12 @@ void EXTI0_IRQHandler(void)
 		EXTI_Handler[EXTI_source]();
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 1)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI1_IRQHandler(void)
 {
 	EXTI_clear_pending_flag(EXTI_source);
@@ -137,6 +148,12 @@ void EXTI1_IRQHandler(void)
 		EXTI_Handler[EXTI_source]();
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 2)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI2_IRQHandler(void)
 {
 	EXTI_clear_pending_flag(EXTI_source);
@@ -145,6 +162,12 @@ void EXTI2_IRQHandler(void)
 		EXTI_Handler[EXTI_source]();
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 3)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI3_IRQHandler(void)
 {
 	EXTI_clear_pending_flag(EXTI_source);
@@ -153,6 +176,12 @@ void EXTI3_IRQHandler(void)
 		EXTI_Handler[EXTI_source]();
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 4)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI4_IRQHandler(void)
 {
 	EXTI_clear_pending_flag(EXTI_source);
@@ -161,6 +190,12 @@ void EXTI4_IRQHandler(void)
 		EXTI_Handler[EXTI_source]();
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 5 : 9)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI9_5_IRQHandler(void)
 {
 	pending_flag_t flag = INT_NOT_TRIGGERED;
@@ -215,6 +250,12 @@ void EXTI9_5_IRQHandler(void)
 		flag = INT_NOT_TRIGGERED;
 	}
 }
+/**
+ * @brief  : (ISR)Interrupt service routine for (External interrupt # 10 : 15)
+ * @param  : void
+ * @return : void
+ *
+ */
 void EXTI15_10_IRQHandler(void)
 {
 	pending_flag_t flag = INT_NOT_TRIGGERED;
@@ -279,3 +320,61 @@ void EXTI15_10_IRQHandler(void)
 		flag = INT_NOT_TRIGGERED;
 	}
 }
+/**
+ * @brief  : EXTI Line 16 interrupt /PVD through EXTI line detection interrupt
+ * @param  : void
+ * @return : void
+ *
+ */
+void EXTI16_PVD_IRQHandler(void)
+{
+	EXTI_clear_pending_flag(EXTI_source);
+	if(NULL != EXTI_Handler[EXTI_source])
+	{
+		EXTI_Handler[EXTI_source]();
+	}
+}
+/**
+ * @brief  : EXTI Line 17 interrupt / RTC Alarms (A and B) through EXTI line interrupt
+ * @param  : void
+ * @return : void
+ *
+ */
+void EXTI17_RTC_Alarm_IRQHandler(void)
+{
+	EXTI_clear_pending_flag(EXTI_source);
+	if(NULL != EXTI_Handler[EXTI_source])
+	{
+		EXTI_Handler[EXTI_source]();
+	}
+}
+/**
+ * @brief  : EXTI Line 18 interrupt / USBUSB On-The-Go FS Wakeup through EXTI line interrupt
+ * @param  : void
+ * @return : void
+ *
+ */
+void EXTI18_OTG_FS_WKUP_IRQHandler(void)
+{
+	EXTI_clear_pending_flag(EXTI_source);
+	if(NULL != EXTI_Handler[EXTI_source])
+	{
+		EXTI_Handler[EXTI_source]();
+	}
+}
+/*	EXTI19 & EXTI20 are reserved*/
+/**
+ * @brief  : EXTI Line 22 interrupt /RTC Wakeup interrupt through the EXTI line
+ * @param  : void
+ * @return : void
+ *
+ */
+void EXTI22_RTC_WKUP_IRQHandler(void)
+{
+	EXTI_clear_pending_flag(EXTI_source);
+	if(NULL != EXTI_Handler[EXTI_source])
+	{
+		EXTI_Handler[EXTI_source]();
+	}
+}
+

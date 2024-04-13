@@ -22,6 +22,7 @@ typedef struct
 
 
 /******************* Interfaces Declaration *******************/
+
 /**
  * @brief  : Initialize the external interrupt pin
  * @param  : (EXTI_object) pointer to configuration @ref EXTI_config_t

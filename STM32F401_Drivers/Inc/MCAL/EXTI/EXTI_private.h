@@ -9,8 +9,8 @@
 #define MCAL_EXTI_EXTI_PRIVATE_H_
 
 
-#define EXTI_DISABLE 		0
-#define EXTI_ENABLE 		1
+#define EXTI_DISABLE 			0
+#define EXTI_ENABLE 			1
 
 #define EXTI_MAX_NUMBER			23
 
@@ -54,10 +54,10 @@ typedef enum
 	EXTI_16 ,
 	EXTI_17 ,
 	EXTI_18 ,
-	EXTI_19 ,
-	EXTI_20 ,
-	EXTI_21 ,
-	EXTI_22 ,
+	//EXTI_19 , reserved
+	//EXTI_20 , reserved
+	EXTI_21 = 21,
+	EXTI_22 = 22,
 }EXTI_source_t;
 
 

@@ -46,11 +46,7 @@ typedef enum
 	DMA1_Stream5_IRQn		=16,		/*DMA1 Stream5 global interrupt*/
 	DMA1_Stream6_IRQn		=17,		/*DMA1 Stream6 global interrupt*/
 	ADC_IRQn				=18,		/*ADC1 global interrupts*/
-	EXTI9_5					=19,		/*EXTI Line[9:5] interrupts */
-	EXTI9_6					=20,
-	EXTI9_7					=21,
-	EXTI9_8					=22,
-	EXTI9_9					=23,
+	EXTI9_5_IRQn			=23,		/*EXTI Line[9:5] interrupts */
 	TIM1_BRK_TIM9_IRQn		=24,		/*TIM1 Break interrupt and TIM9 global interrupt */
 	TIM1_UP_TIM10_IRQn		=25,		/*TIM1 Update interrupt and TIM10 global interrupt*/
 	TIM1_TRG_COM_TIM11_IRQn	=26,		/*TIM1 Trigger and Commutation interrupts and TIM11 global interrupt*/
