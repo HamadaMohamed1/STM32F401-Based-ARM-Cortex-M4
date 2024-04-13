@@ -1,0 +1,4 @@
+../Src/MCAL/GPIO/GPIO.c:20:15:GPIO_Pin_init	24	static
+../Src/MCAL/GPIO/GPIO.c:79:15:GPIO_Set_Pin_Value	24	static
+../Src/MCAL/GPIO/GPIO.c:109:15:GPIO_Toggle_Pin_Value	24	static
+../Src/MCAL/GPIO/GPIO.c:132:15:GPIO_Get_Pin_Value	24	static

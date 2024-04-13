@@ -1,0 +1,7 @@
+../Src/MCAL/EXTI/EXTI.c:15:15:EXTI_initialize	6
+../Src/MCAL/EXTI/EXTI.c:47:15:EXTI_enable	2
+../Src/MCAL/EXTI/EXTI.c:60:15:EXTI_disable	2
+../Src/MCAL/EXTI/EXTI.c:73:15:EXTI_set_pending_flag	2
+../Src/MCAL/EXTI/EXTI.c:86:15:EXTI_clear_pending_flag	2
+../Src/MCAL/EXTI/EXTI.c:99:15:EXTI_read_pending_flag	2
+../Src/MCAL/EXTI/EXTI.c:113:6:EXTI0_IRQHandler	2
