@@ -14,12 +14,23 @@
 
 #define EXTI_MAX_NUMBER			23
 
+
+
 typedef enum
 {
 	RISING_EDGE = 0 ,
 	FALLING_EDGE ,
 	RISING_FALLING_EDGE ,
 }EXTI_edge_t;
+
+
+
+typedef enum
+{
+	INT_NOT_TRIGGERED = 0 ,
+	INT_TRIGGERED ,
+}pending_flag_t;
+
 
 
 typedef enum

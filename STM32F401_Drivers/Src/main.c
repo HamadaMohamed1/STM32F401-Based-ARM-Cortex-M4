@@ -15,7 +15,7 @@ PinConfig_t PC13 = { .Port = PORTC ,.Pin = PIN13,.Mode = OUTPUT ,.Type=PUSH_PULL
 		, .Speed = MEDUIM , .PullType =NO_PULL
 };
 
-void exti_a0_handler(void)
+void exti_b1_handler(void)
 {
 	uint8_t c =0;
 	c++;
@@ -23,16 +23,16 @@ void exti_a0_handler(void)
 
 uint8_t val = INTERRUPT_NOT_ACTIVE;
 
-PinConfig_t exti_Pin = {.Port = PORTA ,.Pin = PIN0 ,.Mode=INPUT ,.Type =PUSH_PULL ,.Speed = MEDUIM ,.PullType = NO_PULL};
+PinConfig_t exti_Pin = {.Port = PORTB ,.Pin = PIN1 ,.Mode=INPUT ,.Speed = MEDUIM ,.PullType = PULL_UP};
 
-EXTI_config_t exti_a0 = {.EXTI_edge = FALLING_EDGE ,.EXTI_enable_disable = EXTI_ENABLE ,.source =EXTI_0 ,.EXTI_handler = exti_a0_handler};
+EXTI_config_t exti_b1 = {.EXTI_edge = RISING_EDGE ,.source =EXTI_1 ,.EXTI_handler = exti_b1_handler};
 
 int main(void)
 {
 	SystemClock_Config();
 	Systick_init();
 	RCC_GPIOC_CLK_ENABLE();
-	RCC_GPIOA_CLK_ENABLE();
+	RCC_GPIOB_CLK_ENABLE();
 	RCC_SYSCFG_CLK_ENABLE();
 	scb_set_priority_group(GROUP_PRIORITIES_4_SUB_PRIORITIES_4);
 	GPIO_Pin_init(&PC13);
@@ -40,11 +40,14 @@ int main(void)
 
 	GPIO_Pin_init(&exti_Pin); 						// configure a pin as an input
 
-	EXTI_initialize(&exti_a0);						// configure trigger & enable interrupt
-	nvic_set_priority(EXTI0_IRQn, 2);				// set interrupt priority via NVIC
-	nvic_enable(EXTI0_IRQn);						// enable interrupt via NVIC
-	syscfg_set_EXTI_port(EXTI_LINE_0,EXTI_PORT_A);	// configure port in SYSSFG
-	EXTI_set_pending_flag(&exti_a0);				// set pending flag;
+	syscfg_set_EXTI_port(EXTI_LINE_1,EXTI_PORT_B);	// configure port in SYSSFG
+	EXTI_enable(EXTI_1);							//  enable interrupt
+	EXTI_initialize(&exti_b1);						// configure trigger
+
+	nvic_set_priority(EXTI1_IRQn, 2);				// set interrupt priority via NVIC
+	nvic_enable(EXTI1_IRQn);						// enable interrupt via NVIC
+
+	EXTI_set_pending_flag(&exti_b1);				// set pending flag;
 
 
 

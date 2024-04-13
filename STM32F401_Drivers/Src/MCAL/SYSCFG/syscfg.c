@@ -7,7 +7,14 @@
 
 #include "../../../Inc/MCAL/SYSCFG/syscfg_interface.h"
 
-
+/**
+ * @brief  : set external interrupt port to SYSCFG
+ * @param  : (line)  @ref EXTI_LINE_t
+ * @param  : (port)
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
 Std_RetType_t syscfg_set_EXTI_port(EXTI_LINE_t line , uint8_t port)
 {
 	Std_RetType_t ret = RET_OK;
@@ -19,10 +26,13 @@ Std_RetType_t syscfg_set_EXTI_port(EXTI_LINE_t line , uint8_t port)
 	}
 	else
 	{
-		l_reg_number = (line / 4) + 1;
-		l_bits_number = (line % 4) * 4;
+		l_reg_number = (line / 4) ;
+		l_bits_number = (line % 4)*4 ;
 		switch(l_reg_number)
 		{
+			case 0:
+				SYSCFG->EXTICR0 |= (port << l_bits_number);
+			break;
 			case 1:
 				SYSCFG->EXTICR1 |= (port << l_bits_number);
 			break;
@@ -31,9 +41,6 @@ Std_RetType_t syscfg_set_EXTI_port(EXTI_LINE_t line , uint8_t port)
 			break;
 			case 3:
 				SYSCFG->EXTICR3 |= (port << l_bits_number);
-			break;
-			case 4:
-				SYSCFG->EXTICR4 |= (port << l_bits_number);
 			break;
 		}
 	}

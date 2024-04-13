@@ -43,9 +43,9 @@
 /******************* APB2 Peripheral Base Addresses *******************/
 #define APB2PERIPHERAL_BASE			  (PERIPHERAL_BASE + 0x00010000UL)
 						/*SYSCFG Base Address*/
-#define SYSCFG_BASE_ADDRESS			  (APB2PERIPHERAL_BASE + 0x00013800UL)
+#define SYSCFG_BASE_ADDRESS			  (APB2PERIPHERAL_BASE + 0x00003800UL)//0x40013800UL
 						/*EXTI Base Address*/
-#define EXTI_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00013C00UL)
+#define EXTI_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00003C00UL)
 
 
 
@@ -229,10 +229,10 @@ typedef struct
 {
     volatile uint32_t MEMRMP;
     volatile uint32_t PMC;
+    volatile uint32_t EXTICR0;
     volatile uint32_t EXTICR1;
     volatile uint32_t EXTICR2;
     volatile uint32_t EXTICR3;
-    volatile uint32_t EXTICR4;
     volatile uint32_t RESERVED[2];
     volatile uint32_t CMPCR;
 }SYSCFG_RegDef_t;
@@ -249,7 +249,7 @@ typedef struct
 
 
 /******************* SYSTICK Peripheral Definition *******************/
-#define SYSTICK		   		 ((STSTICK_RegDef_t  *)SYSTICK_BASE)
+#define SYSTICK		   		 ((STSTICK_RegDef_t *)SYSTICK_BASE)
 /******************* NVIC Peripheral Definition *******************/
 #define NVIC 				 ((NVIC_RegDef_t *) NVIC_BASE)
 /******************* RCC Peripheral Definition *******************/
