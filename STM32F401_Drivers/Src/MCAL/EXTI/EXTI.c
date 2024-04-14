@@ -31,14 +31,18 @@ Std_RetType_t EXTI_initialize(const EXTI_config_t* EXTI_object)
 		switch(EXTI_object->EXTI_edge)
 		{
 			case RISING_EDGE :
-				EXTI->RTSR |= (1 << EXTI_object->source);
+				EXTI->RTSR |=  (1 << EXTI_object->source);
+				EXTI->FTSR &=~ (1 << EXTI_object->source);
 			break;
 			case FALLING_EDGE :
-				EXTI->FTSR |= (1 << EXTI_object->source);
+				EXTI->FTSR |=  (1 << EXTI_object->source);
+				EXTI->RTSR &=~ (1 << EXTI_object->source);
 			break;
 			case RISING_FALLING_EDGE :
-				EXTI->RTSR |= (1 << EXTI_object->source);
-				EXTI->FTSR |= (1 << EXTI_object->source);
+				EXTI->RTSR |=  (1 << EXTI_object->source);
+				EXTI->FTSR |=  (1 << EXTI_object->source);
+			break;
+			default : ret = RET_ERROR;
 			break;
 		}
 		// initiate call back

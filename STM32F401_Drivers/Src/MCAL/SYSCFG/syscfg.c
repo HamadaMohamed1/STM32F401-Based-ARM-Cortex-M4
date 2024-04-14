@@ -31,16 +31,20 @@ Std_RetType_t syscfg_set_EXTI_port(EXTI_LINE_t line , uint8_t port)
 		switch(l_reg_number)
 		{
 			case 0:
-				SYSCFG->EXTICR0 |= (port << l_bits_number);
+				SYSCFG->EXTICR0 &= ~(port << l_bits_number);	/*Clearing the required 4 bits*/
+				SYSCFG->EXTICR0 |=  (port << l_bits_number);	/*Set the required value to 4 bits*/
 			break;
 			case 1:
-				SYSCFG->EXTICR1 |= (port << l_bits_number);
+				SYSCFG->EXTICR1 &= ~(port << l_bits_number);
+				SYSCFG->EXTICR1 |=  (port << l_bits_number);
 			break;
 			case 2:
-				SYSCFG->EXTICR2 |= (port << l_bits_number);
+				SYSCFG->EXTICR2 &= ~(port << l_bits_number);
+				SYSCFG->EXTICR2 |=  (port << l_bits_number);
 			break;
 			case 3:
-				SYSCFG->EXTICR3 |= (port << l_bits_number);
+				SYSCFG->EXTICR3 &= ~(port << l_bits_number);
+				SYSCFG->EXTICR3 |=  (port << l_bits_number);
 			break;
 		}
 	}
