@@ -15,17 +15,15 @@ PinConfig_t PC13 = { .Port = PORTC ,.Pin = PIN13,.Mode = OUTPUT ,.Type=PUSH_PULL
 		, .Speed = MEDUIM , .PullType =NO_PULL
 };
 
-void exti_b7_handler(void)
-{
-	uint8_t c =0;
-	c++;
-}
 
-uint8_t val = INTERRUPT_NOT_ACTIVE;
+volatile uint8_t num = 0 ;
 
-PinConfig_t exti_Pin = {.Port = PORTB ,.Pin = PIN7 ,.Mode=INPUT ,.Speed = MEDUIM ,.PullType = PULL_UP};
+USART_Config_t my_usart = { .USART_Handler =NULL , .usart_baud_rate = 9600 , .usart_hardware_control_flow = HARDWARE_FLOW_CONTROL_IS_NOT_USED ,
+		.usart_mode = RX_TX , .usart_oversampling = OVERSAMPLING_BY_8 , .usart_parity = ODD_PARITY ,
+		.usart_source = USART_2 ,.usart_stop_bits = TWO_STOP_BITS , .usart_type = ASYNCHRONOUS , .usart_word_length = NINE_BITS
 
-EXTI_config_t exti_b7 = {.EXTI_edge = RISING_EDGE ,.source =EXTI_7 ,.EXTI_handler = exti_b7_handler};
+};
+
 
 int main(void)
 {
@@ -33,26 +31,26 @@ int main(void)
 	Systick_init();
 	RCC_GPIOC_CLK_ENABLE();
 	RCC_GPIOB_CLK_ENABLE();
-	RCC_SYSCFG_CLK_ENABLE();
-	scb_set_priority_group(GROUP_PRIORITIES_4_SUB_PRIORITIES_4);
+	//RCC_SYSCFG_CLK_ENABLE();
+	scb_set_priority_group(GROUP_PRIORITIES_4_SUB_PRIORITIES_4);	  // preemption
+	//cb_set_priority_group(GROUP_PRIORITIES_1_SUB_PRIORITIES_16);   // no preemption because 1 group
 	GPIO_Pin_init(&PC13);
 
+	RCC_USART2_CLK_ENABLE();
+	USART_init(&my_usart);
 
-	GPIO_Pin_init(&exti_Pin); 						// configure a pin as an input
-
-	syscfg_set_EXTI_port(EXTI_LINE_7,EXTI_PORT_B);	// configure port in SYSSFG
-	EXTI_enable(EXTI_7);							//  enable interrupt
-	EXTI_initialize(&exti_b7);						// configure trigger
-
-	nvic_set_priority(EXTI9_5_IRQn, 2);			// set interrupt priority via NVIC
-	nvic_enable(EXTI9_5_IRQn);						// enable interrupt via NVIC
-
-	EXTI_set_pending_flag(&exti_b7);				// set pending flag;
-
-
-
-	//nvic_set_priority(USART2_IRQn,5);//0101   g =1   , s= 1
-	//nvic_set_priority(USART1_IRQn,2);//0010   g =0   , s= 2
+//
+//
+//	nvic_enable(ADC_IRQn);
+//	nvic_set_priority(ADC_IRQn,10);      //10->1010		 g =2  ,  s=2
+//	//nvic_set_priority(ADC_IRQn,1);		//1-> 0001       g =0   , s= 1          highest priority than usart2
+//
+//
+//
+//	nvic_enable(USART2_IRQn);
+//	nvic_set_priority(USART2_IRQn,5);	//0101   g =1   , s= 1
+//
+//	nvic_set_pending_flag(USART2_IRQn);
 
 
 
@@ -63,7 +61,6 @@ int main(void)
 		GPIO_Toggle_Pin_Value(PORTC, PIN13);
 		delay_ms(100);
 
-		EXTI_set_pending_flag(&exti_b7);
 	}
 
 }
@@ -84,4 +81,19 @@ Std_RetType_t SystemClock_Config(void)
 	RCC_ClkInitStruct.APB2ClkDivider =RCC_HCLK_APB2_DIV1;
 	ret = HALL_RCC_ClockConfig(&RCC_ClkInitStruct);
 	return ret;
+}
+
+
+void USART2_IRQHandler(void)
+{
+
+	num++;
+	num++;
+	nvic_set_pending_flag(ADC_IRQn);
+	num++;
+}
+
+void ADC_IRQHandler(void)
+{
+	num+=5;
 }

@@ -38,7 +38,11 @@ Src/main.o: ../Src/main.c ../Src/../Inc/main.h \
  ../Src/../Inc/../Inc/MCAL/EXTI/EXTI_interface.h \
  ../Src/../Inc/../Inc/MCAL/EXTI/EXTI_private.h \
  ../Src/../Inc/../Inc/MCAL/EXTI/../../LIBRARY/Common_Macros.h \
- ../Src/../Inc/../Inc/MCAL/EXTI/../../LIBRARY/Stm32f401xx.h
+ ../Src/../Inc/../Inc/MCAL/EXTI/../../LIBRARY/Stm32f401xx.h \
+ ../Src/../Inc/../Inc/MCAL/USART/USART_Interface.h \
+ ../Src/../Inc/../Inc/MCAL/USART/USART_Private.h \
+ ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Common_Macros.h \
+ ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Stm32f401xx.h
 ../Src/../Inc/main.h:
 ../Src/../Inc/../Inc/LIBRARY/Common_Macros.h:
 ../Src/../Inc/../Inc/MCAL/RCC/RCC.h:
@@ -80,3 +84,7 @@ Src/main.o: ../Src/main.c ../Src/../Inc/main.h \
 ../Src/../Inc/../Inc/MCAL/EXTI/EXTI_private.h:
 ../Src/../Inc/../Inc/MCAL/EXTI/../../LIBRARY/Common_Macros.h:
 ../Src/../Inc/../Inc/MCAL/EXTI/../../LIBRARY/Stm32f401xx.h:
+../Src/../Inc/../Inc/MCAL/USART/USART_Interface.h:
+../Src/../Inc/../Inc/MCAL/USART/USART_Private.h:
+../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Common_Macros.h:
+../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Stm32f401xx.h:

@@ -8,6 +8,7 @@
 "./Src/MCAL/GPIO/GPIO.o"
 "./Src/MCAL/RCC/RCC.o"
 "./Src/MCAL/SYSCFG/syscfg.o"
+"./Src/MCAL/USART/USART.o"
 "./Src/main.o"
 "./Src/syscalls.o"
 "./Src/sysmem.o"

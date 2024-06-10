@@ -33,6 +33,7 @@ Src/MCAL/EXTI \
 Src/MCAL/GPIO \
 Src/MCAL/RCC \
 Src/MCAL/SYSCFG \
+Src/MCAL/USART \
 Src \
 Startup \
 

@@ -46,13 +46,22 @@
 #define SYSCFG_BASE_ADDRESS			  (APB2PERIPHERAL_BASE + 0x00003800UL)//0x40013800UL
 						/*EXTI Base Address*/
 #define EXTI_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00003C00UL)
-
-
+						/*USART1 Base Address*/
+#define USART1_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00001000UL)
+						/*USART6 Base Address*/
+#define USART6_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00001400UL)
 
 
 /******************* AHB3 Peripheral Base Addresses *******************/
 
 /******************* APB1 Peripheral Base Addresses *******************/
+#define APB1PERIPHERAL_BASE			  (PERIPHERAL_BASE)
+						/*USART2 Base Address*/
+#define USART2_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00004400UL)
+
+#define RCC_APB1ENR_USART2_POS		 (17UL)
+
+
 
 /******************* APB2 Peripheral Registers *******************/
 #define RCC_APB2ENR_SYSCFG_POS 		(14UL)
@@ -247,6 +256,18 @@ typedef struct
     volatile uint32_t PR;
 }EXTI_RegDef_t;
 
+/******************* USART Register Definition Structure *******************/
+typedef struct
+{
+    volatile uint32_t USART_SR;		//Status register
+    volatile uint32_t USART_DR;		//Data register
+    volatile uint32_t USART_BRR;	//Baud rate register
+    volatile uint32_t USART_CR1;	//Control register 1
+    volatile uint32_t USART_CR2;	//Control register 2
+    volatile uint32_t USART_CR3;	//Control register 3
+    volatile uint32_t USART_GTPR;	//Guard time and prescaler register
+}USART_RegDef_t;
+
 
 /******************* SYSTICK Peripheral Definition *******************/
 #define SYSTICK		   		 ((STSTICK_RegDef_t *)SYSTICK_BASE)
@@ -268,5 +289,14 @@ typedef struct
 #define SYSCFG 				 ((SYSCFG_RegDef_t *) SYSCFG_BASE_ADDRESS)
 /******************* EXTI Peripheral Definition *******************/
 #define EXTI 				 ((EXTI_RegDef_t *) EXTI_BASE_ADDRESS)
+/******************* USART1 Peripheral Definition *******************/
+#define USART1 				 ((USART_RegDef_t *) USART1_BASE_ADDRESS)
+/******************* USART2 Peripheral Definition *******************/
+#define USART2 				 ((USART_RegDef_t *) USART2_BASE_ADDRESS)
+/******************* USART6 Peripheral Definition *******************/
+#define USART6 				 ((USART_RegDef_t *) USART6_BASE_ADDRESS)
+
+
+
 
 #endif /* LIBRARY_STM32F401XX_H_ */

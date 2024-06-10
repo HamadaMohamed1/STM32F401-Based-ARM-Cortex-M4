@@ -21,6 +21,7 @@
 #include "../Inc/Core_Peripheral/SCB/SCB_Interface.h"
 #include "../Inc/MCAL/SYSCFG/syscfg_interface.h"
 #include "../Inc/MCAL/EXTI/EXTI_interface.h"
+#include "../Inc/MCAL/USART/USART_Interface.h"
 /******************* Interfaces Declaration *******************/
 
 Std_RetType_t SystemClock_Config(void);

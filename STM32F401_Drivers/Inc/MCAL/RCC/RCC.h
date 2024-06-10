@@ -53,9 +53,12 @@
 
 
 
+/******************** APB1 Peripherals ******************************/
+#define RCC_USART2_CLK_ENABLE()		(SET_BIT(RCC->APB1ENR , RCC_APB1ENR_USART2_POS))
+#define RCC_USART2_CLK_DISABLE()	(CLEAR_BIT(RCC->APB1ENR , RCC_APB1ENR_USART2_POS))
 
 /******************** APB2 Peripherals ******************************/
-#define RCC_SYSCFG_CLK_ENABLE()	(SET_BIT(RCC->APB2ENR , RCC_APB2ENR_SYSCFG_POS))
+#define RCC_SYSCFG_CLK_ENABLE()		(SET_BIT(RCC->APB2ENR , RCC_APB2ENR_SYSCFG_POS))
 
 #define RCC_SYSCFG_CLK_DISABLE()	(CLEAR_BIT(RCC->APB2ENR , RCC_APB2ENR_SYSCFG_POS))
 
