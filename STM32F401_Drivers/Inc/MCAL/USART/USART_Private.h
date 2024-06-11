@@ -11,6 +11,7 @@
 /******************* Includes *******************/
 #include "../../LIBRARY/Common_Macros.h"
 #include "../../LIBRARY/Stm32f401xx.h"
+#include "../../Core_Peripheral/NVIC/NVIC_Interface.h"
 /******************* Macro Declarations *******************/
 #define USART_MAX_NUMBER 3
 
@@ -23,10 +24,17 @@
 #define USART_TRANSMITTER_ENABLE_BIT_POS 3
 #define USART_RECEIVER_ENABLE_BIT_POS 2
 
+#define USART_TX_INTERRUPT_ENABLE_BIT_POS  7
+#define USART_RX_INTERRUPT_ENABLE_BIT_POS  5
 
 
 /*bits in register CR2*/
 #define USART_STOP_BITS_POS	12
+
+/*bits in register SR*/
+#define USART_RX_FLAG_BIT_POS 	0x00000020
+#define USART_TX_FLAG_BIT_POS 	0x00000080
+
 
 /******************* Macro Function Declarations *******************/
 
@@ -50,6 +58,13 @@ typedef enum
 	TX_ONLY ,		// for sending only
 	RX_TX			// for sending & receiving
 }USART_mode_t;
+
+typedef enum
+{
+	POLLING =0,
+	INTERRUPT ,
+	DMA
+}USART_Rx_Tx_mode_t;
 
 typedef enum {
     BAUD_300     = 300,

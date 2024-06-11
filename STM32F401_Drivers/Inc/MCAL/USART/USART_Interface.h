@@ -13,39 +13,94 @@
 /******************* Data Type Declarations *******************/
 typedef struct
 {
-	USART_source_t       			usart_source;
-	USART_type_t         			usart_type;
-	USART_mode_t         			usart_mode;
-	USART_baud_rate_t    			usart_baud_rate;
-	USART_stop_bits_t    			usart_stop_bits;
-	USART_word_length_t  			usart_word_length;
-	USART_parity_t       			usart_parity;
-	USART_oversampling_t 			usart_oversampling;
-	USART_hardware_control_flow_t   usart_hardware_control_flow;
-	void (* USART_Handler)(void);
+	USART_source_t       			source;
+	USART_type_t         			type;
+	USART_mode_t         			mode;
+	USART_baud_rate_t    			baud_rate;
+	USART_stop_bits_t    			stop_bits;
+	USART_word_length_t  			word_length;
+	USART_parity_t       			parity;
+	USART_oversampling_t 			oversampling;
+	USART_hardware_control_flow_t   hardware_control_flow;
+	USART_Rx_Tx_mode_t 				tx_mode;
+	USART_Rx_Tx_mode_t 				rx_mode;
 }USART_Config_t;
 
 /******************* Interfaces Declarations *******************/
+/**
+ * @brief  : Initialize the USART peripheral
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
 Std_RetType_t USART_init(const USART_Config_t* USART_obj);
-
+/**
+ * @brief  : De Initialize the USART peripheral
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
 Std_RetType_t USART_de_init(const USART_Config_t* USART_obj);
-
-Std_RetType_t USART_send_byte(const USART_Config_t* USART_obj , uint8_t byte);
-
-Std_RetType_t USART_receive_byte(const USART_Config_t* USART_obj , uint8_t *byte);
-
-Std_RetType_t USART_send_string(const USART_Config_t* USART_obj , uint8_t *data);
-
-Std_RetType_t USART_recieve_string(const USART_Config_t* USART_obj , uint8_t *data);
+/**
+ * @brief  : Send a byte via USART with blocking mode (polling)
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (byte) the data(byte) to be sent
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_send_byte_blocking(const USART_Config_t* USART_obj , uint8_t byte);
+/**
+ * @brief  : Receive a byte via USART with blocking mode (polling)
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (byte) pointer to store the data(byte) that received
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_receive_byte_blocking(const USART_Config_t* USART_obj , uint8_t *byte);
+/**
+ * @brief  : Send a String of data via USART with blocking mode (polling)
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (data) pointer to the data that to be sent
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_send_string_blocking(const USART_Config_t* USART_obj , uint8_t *data);
+/**
+ * @brief  : Receive a String of data via USART with blocking mode (polling)
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (data) pointer to store the data that received
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_receive_string_blocking(const USART_Config_t* USART_obj , uint8_t *data);
 
 /*****************************************************************************/
-Std_RetType_t USART_init_DMA(const USART_Config_t* USART_obj);
+/**
+ * @brief  : Send a byte via USART with Interrupt mode
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (byte) the data(byte) to be sent
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_send_byte_IT(const USART_Config_t* USART_obj , uint8_t byte);
+/**
+ * @brief  : Receive a byte via USART with Interrupt mode
+ * @param  : (USART_obj) Pointer to the configuration @ref USART_Config_t
+ * 		   : (byte) pointer to store the data(byte) that received
+ * @return :
+ * 			(RET_OK) : The function done successfully
+ * 			(RET_ERROR) : The function has a problem to perform this action
+ */
+Std_RetType_t USART_receive_byte_IT(const USART_Config_t* USART_obj , uint8_t *byte);
 
-Std_RetType_t USART_de_init_DMA(const USART_Config_t* USART_obj);
-
-Std_RetType_t USART_send_byte_DMA(const USART_Config_t* USART_obj , uint8_t byte);
-
-Std_RetType_t USART_receive_byte_DMA(const USART_Config_t* USART_obj , uint8_t *byte);
+/*****************************************************************************/
 
 
 

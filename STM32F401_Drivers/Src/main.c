@@ -15,16 +15,30 @@ PinConfig_t PC13 = { .Port = PORTC ,.Pin = PIN13,.Mode = OUTPUT ,.Type=PUSH_PULL
 		, .Speed = MEDUIM , .PullType =NO_PULL
 };
 
+//void usart2_handlar(void)
+//{
+//	GPIO_Toggle_Pin_Value(PORTC, PIN13);
+//
+//}
 
 volatile uint8_t num = 0 ;
 
-USART_Config_t my_usart = { .USART_Handler =NULL , .usart_baud_rate = 9600 , .usart_hardware_control_flow = HARDWARE_FLOW_CONTROL_IS_NOT_USED ,
-		.usart_mode = RX_TX , .usart_oversampling = OVERSAMPLING_BY_8 , .usart_parity = ODD_PARITY ,
-		.usart_source = USART_2 ,.usart_stop_bits = TWO_STOP_BITS , .usart_type = ASYNCHRONOUS , .usart_word_length = NINE_BITS
+USART_Config_t my_usart = {.baud_rate = 9600 , .hardware_control_flow = HARDWARE_FLOW_CONTROL_IS_NOT_USED ,
+		.mode = RX_TX , .oversampling = OVERSAMPLING_BY_16 , .parity = WITHOUT_PARITY ,
+		.source = USART_2 ,.stop_bits = ONE_STOP_BIT , .type = ASYNCHRONOUS , .word_length = EGHIT_BITS , .tx_mode = POLLING , .rx_mode = POLLING
 
 };
 
 
+
+PinConfig_t PA2_TX = { .Port = PORTA ,.Pin = PIN2,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
+		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
+};
+
+PinConfig_t PA3_RX = { .Port = PORTA ,.Pin = PIN3,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
+		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
+};
+uint8_t ch;
 int main(void)
 {
 	SystemClock_Config();
@@ -36,8 +50,21 @@ int main(void)
 	//cb_set_priority_group(GROUP_PRIORITIES_1_SUB_PRIORITIES_16);   // no preemption because 1 group
 	GPIO_Pin_init(&PC13);
 
+	RCC_GPIOA_CLK_ENABLE();
 	RCC_USART2_CLK_ENABLE();
+
+	GPIO_Pin_init(&PA2_TX);
+	GPIO_Pin_init(&PA3_RX);
+
 	USART_init(&my_usart);
+
+
+//	USART_send_byte_blocking(&my_usart, 'H');
+//	delay_ms(50);
+//	USART_receive_byte_blocking(&my_usart, &ch);
+//	delay_ms(50);
+//	USART_send_byte_blocking(&my_usart, '\r');
+//	USART_send_byte_blocking(&my_usart, ch);
 
 //
 //
@@ -54,13 +81,34 @@ int main(void)
 
 
 
+	uint8_t ch[] = "hamada mohamed elsayed";
+	uint8_t str[20];
+	USART_send_string_blocking(&my_usart, ch);
 
+	USART_receive_string_blocking(&my_usart , str);
+
+	USART_send_string_blocking(&my_usart, str);
+	//uint8_t ch ;
+	//USART_receive_byte_IT(&my_usart,&ch);
     /* Loop forever */
 	while(1)
 	{
+		//USART_receive_byte_IT(&my_usart,&ch);
 		GPIO_Toggle_Pin_Value(PORTC, PIN13);
 		delay_ms(100);
-
+		//USART_send_byte_IT(&my_usart,'H');
+//		if(ch == '1')
+//		{
+//			GPIO_Set_Pin_Value(PORTC, PIN13, PIN_LOW);
+//		}
+//		if(ch == '0')
+//		{
+//			GPIO_Set_Pin_Value(PORTC, PIN13, PIN_HIGH);
+//		}
+//		if(ch == '2')
+//		{
+//			USART_send_byte_IT(&my_usart,'z');
+//		}
 	}
 
 }
@@ -84,16 +132,3 @@ Std_RetType_t SystemClock_Config(void)
 }
 
 
-void USART2_IRQHandler(void)
-{
-
-	num++;
-	num++;
-	nvic_set_pending_flag(ADC_IRQn);
-	num++;
-}
-
-void ADC_IRQHandler(void)
-{
-	num+=5;
-}
