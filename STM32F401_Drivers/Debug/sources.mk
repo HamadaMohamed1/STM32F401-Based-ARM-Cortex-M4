@@ -31,7 +31,9 @@ Src/HAL/LCD \
 Src/HAL/LED \
 Src/MCAL/EXTI \
 Src/MCAL/GPIO \
+Src/MCAL/I2C \
 Src/MCAL/RCC \
+Src/MCAL/SPI \
 Src/MCAL/SYSCFG \
 Src/MCAL/USART \
 Src \

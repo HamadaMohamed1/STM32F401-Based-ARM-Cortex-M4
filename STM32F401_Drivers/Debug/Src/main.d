@@ -43,7 +43,15 @@ Src/main.o: ../Src/main.c ../Src/../Inc/main.h \
  ../Src/../Inc/../Inc/MCAL/USART/USART_Private.h \
  ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Common_Macros.h \
  ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Stm32f401xx.h \
- ../Src/../Inc/../Inc/MCAL/USART/../../Core_Peripheral/NVIC/NVIC_Interface.h
+ ../Src/../Inc/../Inc/MCAL/USART/../../Core_Peripheral/NVIC/NVIC_Interface.h \
+ ../Src/../Inc/../Inc/MCAL/SPI/SPI_Interface.h \
+ ../Src/../Inc/../Inc/MCAL/SPI/SPI_Private.h \
+ ../Src/../Inc/../Inc/MCAL/SPI/../../LIBRARY/Common_Macros.h \
+ ../Src/../Inc/../Inc/MCAL/SPI/../../LIBRARY/Stm32f401xx.h \
+ ../Src/../Inc/../Inc/MCAL/I2C/I2C_Interface.h \
+ ../Src/../Inc/../Inc/MCAL/I2C/I2C_private.h \
+ ../Src/../Inc/../Inc/MCAL/I2C/../../LIBRARY/Common_Macros.h \
+ ../Src/../Inc/../Inc/MCAL/I2C/../../LIBRARY/Stm32f401xx.h
 ../Src/../Inc/main.h:
 ../Src/../Inc/../Inc/LIBRARY/Common_Macros.h:
 ../Src/../Inc/../Inc/MCAL/RCC/RCC.h:
@@ -90,3 +98,11 @@ Src/main.o: ../Src/main.c ../Src/../Inc/main.h \
 ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Common_Macros.h:
 ../Src/../Inc/../Inc/MCAL/USART/../../LIBRARY/Stm32f401xx.h:
 ../Src/../Inc/../Inc/MCAL/USART/../../Core_Peripheral/NVIC/NVIC_Interface.h:
+../Src/../Inc/../Inc/MCAL/SPI/SPI_Interface.h:
+../Src/../Inc/../Inc/MCAL/SPI/SPI_Private.h:
+../Src/../Inc/../Inc/MCAL/SPI/../../LIBRARY/Common_Macros.h:
+../Src/../Inc/../Inc/MCAL/SPI/../../LIBRARY/Stm32f401xx.h:
+../Src/../Inc/../Inc/MCAL/I2C/I2C_Interface.h:
+../Src/../Inc/../Inc/MCAL/I2C/I2C_private.h:
+../Src/../Inc/../Inc/MCAL/I2C/../../LIBRARY/Common_Macros.h:
+../Src/../Inc/../Inc/MCAL/I2C/../../LIBRARY/Stm32f401xx.h:

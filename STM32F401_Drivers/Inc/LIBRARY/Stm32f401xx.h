@@ -47,25 +47,58 @@
 						/*EXTI Base Address*/
 #define EXTI_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00003C00UL)
 						/*USART1 Base Address*/
-#define USART1_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00001000UL)
+#define USART1_BASE_ADDRESS 		  (APB2PERIPHERAL_BASE + 0x00001000UL)
 						/*USART6 Base Address*/
-#define USART6_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00001400UL)
-
-
+#define USART6_BASE_ADDRESS 		  (APB2PERIPHERAL_BASE + 0x00001400UL)
+						/*SPI1 Base Address*/
+#define SPI1_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00003000UL)
+						/*SPI4 Base Address*/
+#define SPI4_BASE_ADDRESS 			  (APB2PERIPHERAL_BASE + 0x00003400UL)
 /******************* AHB3 Peripheral Base Addresses *******************/
 
 /******************* APB1 Peripheral Base Addresses *******************/
 #define APB1PERIPHERAL_BASE			  (PERIPHERAL_BASE)
 						/*USART2 Base Address*/
 #define USART2_BASE_ADDRESS 		  (APB1PERIPHERAL_BASE + 0x00004400UL)
+						/*SPI2 Base Address*/
+#define SPI2_BASE_ADDRESS 			  (APB1PERIPHERAL_BASE + 0x00003800UL)
+						/*SPI3 Base Address*/
+#define SPI3_BASE_ADDRESS 			  (APB1PERIPHERAL_BASE + 0x00003C00UL)
+						/*I2C1 Base Address*/
+#define I2C1_BASE_ADDRESS 			  (APB1PERIPHERAL_BASE + 0x00005400UL)
+						/*I2C2 Base Address*/
+#define I2C2_BASE_ADDRESS 			  (APB1PERIPHERAL_BASE + 0x00005800UL)
+						/*I2C3 Base Address*/
+#define I2C3_BASE_ADDRESS 			  (APB1PERIPHERAL_BASE + 0x00005C00UL)
+
+
+
+
+
+
+
+						/*APB1ENR Register*/
 
 #define RCC_APB1ENR_USART2_POS		 (17UL)
 
+#define RCC_APB1ENR_SPI3_POS 		 (15UL)
+#define RCC_APB1ENR_SPI2_POS 		 (14UL)
+
+#define RCC_APB1ENR_I2C1_POS 		 (21UL)
+#define RCC_APB1ENR_I2C2_POS 		 (22UL)
+#define RCC_APB1ENR_I2C3_POS 		 (23UL)
 
 
 /******************* APB2 Peripheral Registers *******************/
 #define RCC_APB2ENR_SYSCFG_POS 		(14UL)
 
+#define RCC_APB2ENR_USART1_POS 		(4UL)
+#define RCC_APB2ENR_USART6_POS 		(5UL)
+
+
+
+#define RCC_APB2ENR_SPI1_POS 		(12UL)
+#define RCC_APB2ENR_SPI4_POS 		(13UL)
 
 /******************* AHB1 Peripheral Registers *******************/
 /*******************AHB1ENR Register*******************/
@@ -268,6 +301,36 @@ typedef struct
     volatile uint32_t USART_GTPR;	//Guard time and prescaler register
 }USART_RegDef_t;
 
+/******************* SPI Register Definition Structure *******************/
+typedef struct
+{
+    volatile uint32_t SPI_CR1;		//SPI control register 1
+    volatile uint32_t SPI_CR2;		//SPI control register 2 (
+    volatile uint32_t SPI_SR;		//SPI status register
+    volatile uint32_t SPI_DR;		//SPI data register
+    volatile uint32_t SPI_CRCPR;	//SPI CRC polynomial register
+    volatile uint32_t SPI_RXCRCR;	//SPI RX CRC register
+    volatile uint32_t SPI_TXCRCR;	//SPI TX CRC register
+    volatile uint32_t SPI_I2SCFGR;	//SPI_I2 S configuration register
+    volatile uint32_t SPI_I2SPR;	//SPI_I2 S prescaler register
+}SPI_RegDef_t;
+
+/******************* I2C Register Definition Structure *******************/
+typedef struct
+{
+	volatile uint32_t I2C_CR1;		//I2C Control register 1
+	volatile uint32_t I2C_CR2;		//I2C Control register 2
+	volatile uint32_t I2C_OAR1;		//I2C Own address register 1
+	volatile uint32_t I2C_OAR2;		//I2C Control register 2
+	volatile uint32_t I2C_DR;		//I2C Data register
+	volatile uint32_t I2C_SR1;		//I2C Status register 1
+	volatile uint32_t I2C_SR2;		//I2C Status register 2
+	volatile uint32_t I2C_CCR;		//I2C Clock control register
+	volatile uint32_t I2C_TRISE;	//I2C TRISE register
+	volatile uint32_t I2C_FLTR;		//I2C FLTR register
+}I2C_RegDef_t;
+
+
 
 /******************* SYSTICK Peripheral Definition *******************/
 #define SYSTICK		   		 ((STSTICK_RegDef_t *)SYSTICK_BASE)
@@ -295,7 +358,20 @@ typedef struct
 #define USART2 				 ((USART_RegDef_t *) USART2_BASE_ADDRESS)
 /******************* USART6 Peripheral Definition *******************/
 #define USART6 				 ((USART_RegDef_t *) USART6_BASE_ADDRESS)
-
+/******************* SPI1 Peripheral Definition *******************/
+#define SPI1 				 ((SPI_RegDef_t *) SPI1_BASE_ADDRESS)
+/******************* SPI2 Peripheral Definition *******************/
+#define SPI2 				 ((SPI_RegDef_t *) SPI2_BASE_ADDRESS)
+/******************* SPI3 Peripheral Definition *******************/
+#define SPI3				 ((SPI_RegDef_t *) SPI3_BASE_ADDRESS)
+/******************* SPI4 Peripheral Definition *******************/
+#define SPI4 				 ((SPI_RegDef_t *) SPI4_BASE_ADDRESS)
+/******************* I2C1 Peripheral Definition *******************/
+#define I2C1 				 ((I2C_RegDef_t *)I2C1_BASE_ADDRESS)
+/******************* I2C2 Peripheral Definition *******************/
+#define I2C2 				 ((I2C_RegDef_t *)I2C2_BASE_ADDRESS)
+/******************* I2C3 Peripheral Definition *******************/
+#define I2C3 				 ((I2C_RegDef_t *)I2C3_BASE_ADDRESS)
 
 
 
