@@ -1,2 +1,2 @@
-../Src/main.c:38:5:main	1
-../Src/main.c:91:15:SystemClock_Config	1
+../Src/main.c:44:5:main	1
+../Src/main.c:93:15:SystemClock_Config	1

@@ -16,23 +16,29 @@ PinConfig_t PC13 = { .Port = PORTC ,.Pin = PIN13,.Mode = OUTPUT ,.Type=PUSH_PULL
 };
 
 
-USART_Config_t my_usart = {.baud_rate = BAUD_9600 , .hardware_control_flow = HARDWARE_FLOW_CONTROL_IS_NOT_USED ,
-		.mode = RX_TX , .oversampling = OVERSAMPLING_BY_16 , .parity = WITHOUT_PARITY ,
-		.source = USART_2 ,.stop_bits = ONE_STOP_BIT , .type = ASYNCHRONOUS , .word_length = EGHIT_BITS , .tx_mode = POLLING , .rx_mode = POLLING
+//USART_Config_t my_usart = {.baud_rate = BAUD_9600 , .hardware_control_flow = HARDWARE_FLOW_CONTROL_IS_NOT_USED ,
+//		.mode = RX_TX , .oversampling = OVERSAMPLING_BY_16 , .parity = WITHOUT_PARITY ,
+//		.source = USART_2 ,.stop_bits = ONE_STOP_BIT , .type = ASYNCHRONOUS , .word_length = EGHIT_BITS , .tx_mode = POLLING , .rx_mode = INTERRUPT
+//
+//};
+//PinConfig_t PA2_TX = { .Port = PORTA ,.Pin = PIN2,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
+//		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
+//};
+//
+//PinConfig_t PA3_RX = { .Port = PORTA ,.Pin = PIN3,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
+//		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
+//};
+
+lcd_4bit_t lcd = { .lcd_port = PORTB , .lcd_en_pin = PIN8 ,.lcd_rs_pin = PIN9 ,.lcd_data[0] = PIN4
+		,.lcd_data[1] = PIN5 ,.lcd_data[2] = PIN6,.lcd_data[3] = PIN7
+};
+
+keypad_t keypad = {.port = PORTA , .kpd_row_pins[0] = PIN0 ,.kpd_row_pins[1] = PIN1 ,.kpd_row_pins[2] = PIN2 ,
+		.kpd_row_pins[3] = PIN3 , .kpd_col_pins[0] =PIN4 ,.kpd_col_pins[1] =PIN5 ,
+		.kpd_col_pins[2] =PIN6 , .kpd_col_pins[3] =PIN7 ,
 
 };
-PinConfig_t PA2_TX = { .Port = PORTA ,.Pin = PIN2,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
-		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
-};
 
-PinConfig_t PA3_RX = { .Port = PORTA ,.Pin = PIN3,.Mode = ALTERNATE_FUNCTION ,.Type=PUSH_PULL
-		, .Speed = MEDUIM , .PullType =PULL_UP ,.AltFunc = AF7
-};
-
-
-I2C_config_t my_i2c = { .master_or_slave = SLAVE_I2C ,.source = I2C_1 ,.speed = UP_TO_100KHZ
-
-};
 
 
 int main(void)
@@ -47,42 +53,38 @@ int main(void)
 	//cb_set_priority_group(GROUP_PRIORITIES_1_SUB_PRIORITIES_16);   // no preemption because 1 group
 	GPIO_Pin_init(&PC13);
 
-
-	RCC_USART2_CLK_ENABLE();
-
-
-	RCC_I2C1_CLK_ENABLE();
-	RCC_I2C2_CLK_ENABLE();
-	RCC_I2C3_CLK_ENABLE();
-
-
+//	RCC_USART2_CLK_ENABLE();
+//
 //	GPIO_Pin_init(&PA2_TX);
 //	GPIO_Pin_init(&PA3_RX);
 //	USART_init(&my_usart);
+//	delay_ms(100);
+//		uint8_t ch[] = "Hello Eng: Hamada\n";
+//		uint8_t str[250];
+//		uint8_t b ='b';
+//		USART_send_string_blocking(&my_usart, ch);
+//		//USART_receive_string_blocking(&my_usart , str);
+//		//USART_send_string_blocking(&my_usart, str);
+
+	//delay_ms(200);
+	//lcd_4bit_intialize(&lcd);
+	//keypad_initialize(&keypad);
+	uint8_t val = '\0';
+
+//	lcd_4bit_send_char_data(&lcd , 'd');
+
+	//lcd_4bit_send_string(&lcd , "Eng : Hamada");
 
 
 
-//		uint8_t txData[] = {0x01, 0x02, 0x03, 0x04};
-//	    uint8_t rxData[4];
-//
-//	    // Send data
-//	    //SPI_send(&my_spi, txData, sizeof(txData));
-//	    // Receive data
-//
-//
-//		uint8_t ch[] = "hamada mohamed elsayed";
-//		uint8_t str[20];
 
-
-		//USART_receive_string_blocking(&my_usart , str);
-
-		//USART_send_string_blocking(&my_usart, str);
 
     /* Loop forever */
 	while(1)
 	{
-		GPIO_Toggle_Pin_Value(PORTC, 13);
-		delay_ms(500);
+
+
+
 	}
 
 }

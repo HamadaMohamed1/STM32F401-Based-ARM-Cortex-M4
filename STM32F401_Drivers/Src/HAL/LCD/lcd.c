@@ -30,11 +30,11 @@ Std_RetType_t lcd_4bit_intialize(const lcd_4bit_t *lcd)
 			ret = lcd_4bit_pin_init(lcd->lcd_port , lcd->lcd_data[pins_counter]);
 		}
 		delay_ms(20);
-		ret = lcd_4bit_send_command(lcd, _LCD_4BIT_MODE_2_LINE);
+		ret = lcd_4bit_send_command(lcd, _LCD_8BIT_MODE_2_LINE);
 		delay_ms(5);
-		ret = lcd_4bit_send_command(lcd, _LCD_4BIT_MODE_2_LINE);
+		ret = lcd_4bit_send_command(lcd, _LCD_8BIT_MODE_2_LINE);
 		delay_us(150);
-		ret = lcd_4bit_send_command(lcd, _LCD_4BIT_MODE_2_LINE);
+		ret = lcd_4bit_send_command(lcd, _LCD_8BIT_MODE_2_LINE);
 
 		ret = lcd_4bit_send_command(lcd, _LCD_CLEAR);
 		ret = lcd_4bit_send_command(lcd, _LCD_RETURN_HOME);
@@ -68,6 +68,23 @@ Std_RetType_t lcd_4bit_send_char_data(const lcd_4bit_t *lcd, uint8_t data)
         ret = lcd_4bit_send_enable_signal(lcd);
     }
     return ret;
+}
+
+Std_RetType_t lcd_4bit_send_string(const lcd_4bit_t *lcd, uint8_t *str)
+{
+	Std_RetType_t ret = RET_OK;
+	if(NULL == lcd)
+	{
+		ret = RET_ERROR;
+	}
+	else
+	{
+		while(*str)
+		{
+			ret = lcd_4bit_send_char_data(lcd,*str++);
+		}
+	}
+	return ret;
 }
 
 Std_RetType_t lcd_4bit_send_command(const lcd_4bit_t *lcd, uint8_t command)
